@@ -5,20 +5,19 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Allow requests from your Azure Static Web App
+// cors condition + failure when modified
 app.use(cors());
 
-// Serve files from the static folder
+// Serve files from the static folder- ChatGPT aided with this
 app.use(express.static(path.join(__dirname, 'static')));
 
-// Wake-up API
 app.get('/api/wake', (req, res) => {
     res.json({
         message: 'Dice Roller server is awake!'
     });
 });
 
-// Roll one six-sided die
+// Roll
 app.get('/api/roll', (req, res) => {
     const roll = Math.floor(Math.random() * 6) + 1;
 
@@ -27,7 +26,7 @@ app.get('/api/roll', (req, res) => {
     });
 });
 
-// Start the server
+// Start server
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
